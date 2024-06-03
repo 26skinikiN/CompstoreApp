@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Пользователи</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<main class="container-fluid">
+    <h2 class="mb-3 mt-5 text-center">Пользователи</h2>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6">
+            <form th:action="${'/users/' + i.id +'/edit/'}" method="post" class="mb-2" th:each="i : ${users}"
+                  th:if="${i.id != user.id}">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control mb-2" disabled th:value="${i.fio}">
+                    </div>
+                    <div class="col-auto">
+                        <select name="role" class="form-select">
+                            <option th:each="r : ${roles}" th:value="${r}" th:label="${r.name}"
+                                    th:selected="${r == i.role}"></option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button class="w-100 btn btn-warning" type="submit">Обновить</button>
+                    </div>
+                    <div class="col-auto">
+                        <a th:href="${'/users/' + i.id + '/delete'}" class="w-100 btn btn-danger">Удалить</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</main>
+
+</body>
+
+</html>

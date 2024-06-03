@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Заказы</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<div class="container">
+    <h2 class="title mt-5 mb-3 text-center">Заказы</h2>
+    <div class="row mb-2" th:each="i : ${orderings}">
+        <div class="col-4 text-center" style="height: 300px">
+            <img th:src="${'/img/' + i.photo}" class="rounded-5" style="max-width: 100%;max-height: 300px">
+        </div>
+        <div class="col">
+            <p class="lead" th:text="${i.name}"></p>
+            <p class="lead" th:text="${'Статус: ' + i.status.name}"></p>
+            <p th:if="${role == 'ADMIN'}" class="lead" th:text="${'Заказчик: ' + i.owner.fio}"></p>
+            <div class="row">
+                <div class="col-4" th:each="p : ${i.info}">
+                    <span th:text="${p}"></span>
+                </div>
+            </div>
+            <p th:text="${'Описание: ' + i.description}"></p>
+            <a th:if="${i.status.name() == 'REGISTRATION'}" th:href="${'/orderings/' + i.id + '/wait'}"
+               class="btn btn-warning">Заказать</a>
+            <div th:if="${role == 'ADMIN'}">
+                <a th:if="${i.status.name() == 'WAITING'}" th:href="${'/orderings/' + i.id + '/conf'}"
+                   class="btn btn-warning">Подтвердить</a>
+                <a th:if="${i.status.name() == 'WAITING'}" th:href="${'/orderings/' + i.id + '/reject'}"
+                   class="btn btn-danger">Отказать</a>
+                <a th:if="${i.status.name() == 'CONFIRMED'}" th:href="${'/orderings/' + i.id + '/del'}"
+                   class="btn btn-warning">Доставлено</a>
+            </div>
+        </div>
+        <hr class="mt-2">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
