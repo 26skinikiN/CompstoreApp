@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Обновить</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<main class="container-fluid">
+    <h2 class="mb-3 mt-5 text-center">Обновить</h2>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            <div th:if="${message}" class="alert alert-warning text-center" role="alert">
+                <strong th:text="${message}"></strong>
+            </div>
+            <form th:action="${'/processors/' + processor.id + '/edit'}" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-6 mb-2">
+                        <input type="text" class="form-control mb-2" name="name" placeholder="Название" required th:value="${processor.name}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="file" class="form-control mb-2" name="file" accept="image/*" >
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="number" class="form-control mb-2" name="cores" min="1" step="1"
+                               placeholder="Количество ядер" required th:value="${processor.cores}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="number" class="form-control mb-2" name="technicalProcess" min="1" step="1"
+                               placeholder="Тех. процесс" required th:value="${processor.technicalProcess}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="number" class="form-control mb-2" name="frequencyMain" min="0.1" step="0.1"
+                               placeholder="Базовая частота" required th:value="${processor.frequencyMain}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="number" class="form-control mb-2" name="frequencyMax" min="0.1" step="0.1"
+                               placeholder="Максимальная частота" required th:value="${processor.frequencyMax}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="number" class="form-control mb-2" name="cacheL2" min="0.1" step="0.1"
+                               placeholder="Кэш 2 уровня" required th:value="${processor.cacheL2}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="number" class="form-control mb-2" name="cacheL3" min="0.1" step="0.1"
+                               placeholder="Кэш 3 уровня" required th:value="${processor.cacheL3}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="number" class="form-control mb-2" name="tdp" min="1" step="1" placeholder="TDP"
+                               required th:value="${processor.tdp}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="number" class="form-control mb-2" name="price" min="0.01" step="0.01"
+                               placeholder="Цена" required th:value="${processor.price}">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <input type="text" class="form-control mb-2" name="description" placeholder="Описание" required th:value="${processor.description}">
+                    </div>
+                    <div class="col-6">
+                        <button class="w-100 btn btn-warning" type="submit">Обновить</button>
+                    </div>
+                    <div class="col-6">
+                        <button class="w-100 btn btn-secondary" type="reset">Сбросить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</main>
+</body>
+</html>
