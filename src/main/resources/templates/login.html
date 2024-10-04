@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Вход</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<main class="container-fluid">
+    <h2 class="mb-3 mt-5 text-center">Вход</h2>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <div th:if="${param.error}" class="alert alert-warning text-center" role="alert">
+                <strong>Некорректный ввод электронной почты или пароля</strong>
+            </div>
+            <form action="/login" method="post">
+                <input type="email" class="form-control mb-2" name="username" placeholder="Электронная почта" required>
+                <input type="password" class="form-control mb-2" name="password" placeholder="Пароль" required>
+                <button id="button_color" class="w-100 btn btn-warning" type="submit">Войти</button>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</main>
+</body>
+</html>
